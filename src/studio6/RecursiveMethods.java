@@ -12,10 +12,12 @@ public class RecursiveMethods {
 	 *         ...)
 	 */
 	public static double geometricSum(int n) {
-		
-			// FIXME compute the geometric sum for the first n terms recursively
+		if (n == 0) {
 			return 0;
-		
+		}
+		else {
+			return Math.pow(0.5, n) + geometricSum(n-1);
+		}
 	}
 
 	/**
@@ -27,25 +29,52 @@ public class RecursiveMethods {
 	 * @return greatest common divisor of p and q
 	 */
 	public static int gcd(int p, int q) {
-		
-			// FIXME compute the gcd of p and q using recursion
-			return 0;
-		
+		if (q == 0) {
+			return p;
+		}
+		else {
+			int temp = q;
+			q = p % q;
+			p = temp;
+			return gcd(p, q);
+		}
 	}
 
-	
 
 	/**
 	 * This method uses recursion to create a reverse of the given array
 	 * 
 	 * @param array the array to create a reverse of, not to be mutated
 	 * @return an array with the same data as the input but it reverse order
+	 * 
+	 * int[] reversed = new int[array.length];
+		if (array.length > 0) {
+			int lastIndex = array.length - 1;
+			for (int index = 0; index <= array.length / 2; ++index) {
+				int mirrorIndex = lastIndex - index;
+				// note:
+				// since we read from array and write to reversed
+				// we do not need to use a temp variable
+				reversed[index] = array[mirrorIndex];
+				reversed[mirrorIndex] = array[index];
+			}
+		}
+		return reversed;
 	 */
+	public static int[] reverse(int[] array, int n) {
+		int[] reversed = new int[array.length];
+		reversed[n - 1] = array[array.length - n];
+		return reverse(array,n-1);
+	}
+	
 	public static int[] toReversed(int[] array) {
-		
-			// FIXME create a helper method that can recursively reverse the given array
-			return new int[0];
-		
+		int n = array.length;
+		if (array.length == 1) {
+			return array;
+		}
+		else {
+			return reverse(array, n);
+		}
 	}
 
 	/**
